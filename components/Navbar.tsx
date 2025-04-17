@@ -77,7 +77,7 @@ export function Navbar() {
             </SheetTrigger>
             <SheetContent side="left" className="flex flex-col justify-between p-4">
               <SheetHeader>
-                <SheetTitle className="text-lg font-semibold">CookMate</SheetTitle>
+                <SheetTitle className="text-lg font-semibold">Cookly</SheetTitle>
               </SheetHeader>
               <div className="flex flex-col justify-between h-full">
                 <div>
@@ -123,7 +123,7 @@ export function Navbar() {
             />
           )}
           <span className="text-xl font-semibold whitespace-nowrap hidden sm:block">
-            CookMate
+            Cookly
           </span>
         </Link>
       </div>
