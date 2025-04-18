@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input"; // ✅ ShadCN Input
 import { TypeAnimation } from "react-type-animation";
+import AssistantChat from "@/components/AssistantChat";
 
 const HomePage = () => {
   const { theme } = useTheme();
@@ -118,7 +119,12 @@ const HomePage = () => {
         }}
       >
         Start Cooking
+
       </Button>
+      {/* Assistant Chat */}
+      <div className="mt-8 w-full max-w-xl">
+        <AssistantChat />
+      </div>
     </div>
   );
 };

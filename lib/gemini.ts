@@ -127,4 +127,32 @@ export async function askGemini(prompt: string): Promise<string> {
   }
 
   return responseText;
+
 }
+interface ChatMessage {
+  role: string;
+  message: string;
+}
+
+const handleSendMessage = async (
+  userInput: string,
+  setChatHistory: (chatHistory: ChatMessage[]) => void,
+  setIsLoading: (loading: boolean) => void
+) => {
+  if (!userInput.trim()) return;
+
+  setIsLoading(true);
+
+  try {
+    const response = await askGemini(userInput);
+    setChatHistory((prevChatHistory: ChatMessage[]) => [
+      ...prevChatHistory,
+      { role: "assistant", message: response },
+    ]);
+  } catch (error) {
+    console.error("Error sending message:", error);
+    alert("There was an error processing your request. Please try again.");
+  } finally {
+    setIsLoading(false);
+  }
+};
