@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input"; // ✅ ShadCN Input
 import { TypeAnimation } from "react-type-animation";
 import AssistantChat from "@/components/AssistantChat";
+import RecipeChat from "@/components/RecipeChat";
 
 const HomePage = () => {
   const { theme } = useTheme();
@@ -125,6 +126,10 @@ const HomePage = () => {
       <div className="mt-8 w-full max-w-xl">
         <AssistantChat />
       </div>
+      <RecipeChat  onResponse={(data) => {
+  // handle response here
+  console.log("Response from Gemini:", data);
+}} />
     </div>
   );
 };

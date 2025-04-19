@@ -8,6 +8,7 @@ if (!apiKey) {
 
 const genAI = new GoogleGenerativeAI(apiKey);
 
+
 const model = genAI.getGenerativeModel({
   model: "gemini-2.5-pro-preview-03-25",
 });
@@ -20,6 +21,20 @@ const generationConfig = {
   responseModalities: [],
   responseMimeType: "text/plain",
 };
+
+export interface ChatMessage {
+  role: "user" | "model";
+  message: string;
+}
+
+export interface GeminiChatResponse {
+  response: string;
+  chatHistory: ChatMessage[];
+}
+
+export interface GeminiChatRequest {
+  prompt: string;
+}
 
 export async function askGemini(prompt: string): Promise<string> {
   const chatSession = model.startChat({
@@ -129,30 +144,3 @@ export async function askGemini(prompt: string): Promise<string> {
   return responseText;
 
 }
-interface ChatMessage {
-  role: string;
-  message: string;
-}
-
-const handleSendMessage = async (
-  userInput: string,
-  setChatHistory: (chatHistory: ChatMessage[]) => void,
-  setIsLoading: (loading: boolean) => void
-) => {
-  if (!userInput.trim()) return;
-
-  setIsLoading(true);
-
-  try {
-    const response = await askGemini(userInput);
-    setChatHistory((prevChatHistory: ChatMessage[]) => [
-      ...prevChatHistory,
-      { role: "assistant", message: response },
-    ]);
-  } catch (error) {
-    console.error("Error sending message:", error);
-    alert("There was an error processing your request. Please try again.");
-  } finally {
-    setIsLoading(false);
-  }
-};
